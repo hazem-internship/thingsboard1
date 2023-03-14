@@ -40,20 +40,17 @@ spec:
           resources:
             # override requests for the pod here
             requests:
-              cpu: 400m
-              memory: 512Mi
+              cpu: 4000m
+              memory: 5120Mi
         - name: build-mvn-deploy
           resources: {}
-        - name: check-registry
-          resources: {}
-        - name: build-container-build
-          resources: {}
-        - name: promote-changelog
-          resources: {}
-        - name: promote-helm-release
-          resources: {}
-        - name: promote-jx-promote
-          resources: {}
+          script: |
+            #!/usr/bin/env bash
+            source .jx/variables.sh
+            # modify the pom.xml
+            echo "upgrading the pom to version $VERSION"
+            mvn versions:set -DnewVersion=$VERSION
+            mvn clean install -DskipTests
         volumes:
         - name: maven-settings
           secret:
