@@ -40,8 +40,8 @@ spec:
           resources:
             # override requests for the pod here
             requests:
-              cpu: 4000m
-              memory: 5120Mi
+              cpu: 400m
+              memory: 512Mi
         - name: build-mvn-deploy
           resources: {}
           script: |
